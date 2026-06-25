@@ -16,8 +16,8 @@ function Layout({ children }) {
           </Link>
           <div style={{ display: 'flex', gap: '24px' }}>
             {/* Using standard anchor tags for hash links so they scroll properly when already on the landing page */}
-            <a href="/#features" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontWeight: 500 }}>Features</a>
-            <a href="/#gallery" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontWeight: 500 }}>Gallery</a>
+            <a href={`${import.meta.env.BASE_URL}#features`} style={{ color: 'var(--text-muted)', textDecoration: 'none', fontWeight: 500 }}>Features</a>
+            <a href={`${import.meta.env.BASE_URL}#gallery`} style={{ color: 'var(--text-muted)', textDecoration: 'none', fontWeight: 500 }}>Gallery</a>
           </div>
         </div>
       </nav>
@@ -37,8 +37,8 @@ function Layout({ children }) {
               <div>
                 <h4 style={{ marginBottom: '16px', color: 'var(--text-main)' }}>Game</h4>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <li><a href="/#features" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Features</a></li>
-                  <li><a href="/#gallery" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Gallery</a></li>
+                  <li><a href={`${import.meta.env.BASE_URL}#features`} style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Features</a></li>
+                  <li><a href={`${import.meta.env.BASE_URL}#gallery`} style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Gallery</a></li>
                 </ul>
               </div>
               <div>
@@ -61,7 +61,7 @@ function Layout({ children }) {
 
 function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <Layout>
         <Routes>
           <Route path="/" element={<LandingPage />} />

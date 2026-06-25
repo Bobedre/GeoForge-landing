@@ -89,14 +89,14 @@ export default function LandingPage() {
             <div className="glass-panel" style={{ padding: '16px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ width: '100%', aspectRatio: '1', background: 'rgba(0,0,0,0.5)', borderRadius: '8px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-glass)' }}>
                 {/* Fallback styling if image doesn't load */}
-                <img src="/screenshot1.png" alt="GeoForge Puzzle Gameplay" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
+                <img src={`${import.meta.env.BASE_URL}screenshot1.png`} alt="GeoForge Puzzle Gameplay" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
                 <div style={{ display: 'none', color: 'var(--text-muted)' }}>Add /public/screenshot1.png</div>
               </div>
             </div>
             <div className="glass-panel" style={{ padding: '16px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ width: '100%', aspectRatio: '1', background: 'rgba(0,0,0,0.5)', borderRadius: '8px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-glass)' }}>
                 {/* Fallback styling if image doesn't load */}
-                <img src="/screenshot2.png" alt="GeoForge Advanced Board" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
+                <img src={`${import.meta.env.BASE_URL}screenshot2.png`} alt="GeoForge Advanced Board" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
                 <div style={{ display: 'none', color: 'var(--text-muted)' }}>Add /public/screenshot2.png</div>
               </div>
             </div>
