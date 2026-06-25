@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useForm, ValidationError } from '@formspree/react';
 
 export default function LandingPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [state, handleSubmit] = useForm('mqevpyyk');
+
   return (
     <main>
       {/* Hero Section */}
@@ -17,11 +22,11 @@ export default function LandingPage() {
             Master the flow in GeoForge: Assembly. Construct intricate factories, solve complex puzzles, and engineer your way through challenging sectors.
           </p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-            <button className="btn-primary" style={{ animation: 'pulse-glow 2s infinite' }}>
+            <button className="btn-primary" style={{ animation: 'pulse-glow 2s infinite' }} onClick={() => setIsModalOpen(true)}>
               Join Waitlist
             </button>
             <a href="#gallery" className="btn-secondary" style={{ textDecoration: 'none', display: 'inline-block' }}>
-              View Screenshots
+              View Media
             </a>
           </div>
           <p style={{ marginTop: '24px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
@@ -85,6 +90,20 @@ export default function LandingPage() {
             <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>Get a glimpse into the logic and systems you'll be building.</p>
           </div>
           
+          <div className="glass-panel" style={{ padding: '8px', marginBottom: '32px', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ width: '100%', background: 'rgba(0,0,0,0.5)', borderRadius: '8px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-glass)' }}>
+              <video 
+                src={`${import.meta.env.BASE_URL}geoforge-material.mp4`} 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                controls
+                style={{ width: '100%', height: 'auto', maxHeight: '70vh', objectFit: 'contain' }}
+              />
+            </div>
+          </div>
+          
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '32px' }}>
             <div className="glass-panel" style={{ padding: '16px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ width: '100%', aspectRatio: '1', background: 'rgba(0,0,0,0.5)', borderRadius: '8px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border-glass)' }}>
@@ -103,6 +122,102 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Waitlist Modal */}
+      {isModalOpen && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(15, 23, 42, 0.8)',
+          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '24px'
+        }} onClick={() => setIsModalOpen(false)}>
+          <div className="glass-panel" style={{
+            maxWidth: '400px',
+            width: '100%',
+            padding: '40px',
+            position: 'relative',
+            animation: 'fade-in 0.3s ease-out'
+          }} onClick={(e) => e.stopPropagation()}>
+            <button 
+              onClick={() => setIsModalOpen(false)}
+              style={{
+                position: 'absolute', top: '16px', right: '16px',
+                background: 'none', border: 'none', color: 'var(--text-muted)',
+                cursor: 'pointer', padding: '4px'
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            
+            <h3 style={{ fontSize: '1.8rem', marginBottom: '16px', color: 'var(--accent-cyan)' }}>Join the Waitlist</h3>
+            
+            {state.succeeded ? (
+              <div style={{ textAlign: 'center', padding: '24px 0' }}>
+                <div style={{ width: '64px', height: '64px', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid var(--accent-green)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px auto', color: 'var(--accent-green)' }}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <h4 style={{ marginBottom: '8px' }}>You're on the list!</h4>
+                <p style={{ color: 'var(--text-muted)' }}>We'll notify you as soon as GeoForge is ready for testing.</p>
+              </div>
+            ) : (
+              <>
+                <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>
+                  Be the first to know when GeoForge launches and get exclusive early access.
+                </p>
+                
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div>
+                    <input 
+                      type="email" 
+                      name="email"
+                      placeholder="Enter your email address" 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        borderRadius: '8px',
+                        border: '1px solid var(--border-glass)',
+                        background: 'rgba(0, 0, 0, 0.3)',
+                        color: 'var(--text-main)',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        transition: 'border-color 0.2s'
+                      }}
+                      onFocus={(e) => e.target.style.borderColor = 'var(--accent-cyan)'}
+                      onBlur={(e) => e.target.style.borderColor = 'var(--border-glass)'}
+                    />
+                    <ValidationError prefix="Email" field="email" errors={state.errors} />
+                  </div>
+                  <button 
+                    type="submit" 
+                    className="btn-primary" 
+                    disabled={state.submitting}
+                    style={{ 
+                      width: '100%', 
+                      opacity: state.submitting ? 0.7 : 1,
+                      cursor: state.submitting ? 'not-allowed' : 'pointer'
+                    }}
+                  >
+                    {state.submitting ? 'Joining...' : 'Join Waitlist'}
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </main>
   );
 }

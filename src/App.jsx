@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-ro
 import LandingPage from './pages/LandingPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import Credits from './pages/Credits';
 
 function Layout({ children }) {
   return (
@@ -46,6 +47,7 @@ function Layout({ children }) {
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <li><Link to="/privacy" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Privacy Policy</Link></li>
                   <li><Link to="/terms" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Terms of Service</Link></li>
+                  <li><Link to="/credits" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Credits</Link></li>
                 </ul>
               </div>
             </div>
@@ -67,6 +69,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/credits" element={<Credits />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Layout>
